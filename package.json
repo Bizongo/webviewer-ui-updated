@@ -19,6 +19,7 @@
     "jest:watch": "jest --watch"
   },
   "dependencies": {
+    "@pdftron/webviewer": "^10.9.0",
     "@pdftron/webviewer-react-toolkit": "^0.7.11",
     "autolinker": "^3.11.1",
     "blob-stream": "^0.1.3",

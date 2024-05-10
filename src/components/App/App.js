@@ -374,15 +374,15 @@ const App = ({ removeEventHandlers }) => {
         <RibbonOverflowFlyout />
         <ViewControlsFlyout />
         <Accessibility />
-        <Header />
-        {isOfficeEditorMode && (
+        {/* <Header /> */}
+        {/* {isOfficeEditorMode && (
           <LazyLoadWrapper
             Component={LazyLoadComponents.OfficeEditorToolsHeader}
             dataElement={DataElements.OFFICE_EDITOR_TOOLS_HEADER}
           />
-        )}
-        {customizableUI && <TabsHeader/>}
-        <TopHeader />
+        )} */}
+        {/* {customizableUI && <TabsHeader/>} */}
+        {/* <TopHeader /> */}
         <div className="content">
           <LeftHeader />
           {!customizableUI && <LazyLoadWrapper
@@ -393,13 +393,13 @@ const App = ({ removeEventHandlers }) => {
           {!isMultiViewerMode && <DocumentContainer />}
           {window?.ResizeObserver && <MultiViewer />}
           <RightHeader />
-          {!customizableUI && <RightPanel dataElement={DataElements.SEARCH_PANEL} onResize={(width) => dispatch(actions.setSearchPanelWidth(width))}>
+          {/* {!customizableUI && <RightPanel dataElement={DataElements.SEARCH_PANEL} onResize={(width) => dispatch(actions.setSearchPanelWidth(width))}>
             <LazyLoadWrapper
               Component={LazyLoadComponents.SearchPanel}
               dataElement={DataElements.SEARCH_PANEL}
             />
-          </RightPanel>}
-          {!customizableUI && <RightPanel dataElement="notesPanel" onResize={(width) => dispatch(actions.setNotesPanelWidth(width))}>
+          </RightPanel>} */}
+          {/* {!customizableUI && <RightPanel dataElement="notesPanel" onResize={(width) => dispatch(actions.setNotesPanelWidth(width))}>
             {!notesInLeftPanel && <LazyLoadWrapper
               Component={LazyLoadComponents.NotesPanel}
               dataElement={DataElements.NOTES_PANEL}
@@ -410,28 +410,28 @@ const App = ({ removeEventHandlers }) => {
               Component={LazyLoadComponents.RedactionPanel}
               dataElement={DataElements.REDACTION_PANEL}
               redactionAnnotationsList={redactionAnnotationsList} />
-          </RightPanel>}
+          </RightPanel>} */}
           <RightPanel dataElement="watermarkPanel" onResize={(width) => dispatch(actions.setWatermarkPanelWidth(width))}>
             <WatermarkPanel />
           </RightPanel>
-          <RightPanel
+          {/* <RightPanel
             dataElement="wv3dPropertiesPanel"
             onResize={(width) => dispatch(actions.setWv3dPropertiesPanelWidth(width))}
           >
             <Wv3dPropertiesPanel />
-          </RightPanel>
-          <MultiTabEmptyPage />
-          {!customizableUI && <RightPanel
+          </RightPanel> */}
+          {/* <MultiTabEmptyPage /> */}
+          {/* {!customizableUI && <RightPanel
             dataElement="textEditingPanel"
             onResize={(width) => dispatch(actions.setTextEditingPanelWidth(width))}
           >
             <TextEditingPanel />
-          </RightPanel>}
-          <MultiViewerWrapper>
+          </RightPanel>} */}
+          {/* <MultiViewerWrapper>
             <RightPanel dataElement="comparePanel" onResize={(width) => dispatch(actions.setComparePanelWidth(width))}>
               <ComparePanel />
             </RightPanel>
-          </MultiViewerWrapper>
+          </MultiViewerWrapper> */}
           <BottomHeader />
         </div>
         <LazyLoadWrapper
@@ -512,7 +512,7 @@ const App = ({ removeEventHandlers }) => {
           dataElement={DataElements.SCALE_MODAL}
           onOpenHook={useOnMeasurementToolOrAnnotationSelected}
         />
-        <LazyLoadWrapper Component={LazyLoadComponents.ContentEditLinkModal} dataElement={DataElements.CONTENT_EDIT_LINK_MODAL} />
+        {/* <LazyLoadWrapper Component={LazyLoadComponents.ContentEditLinkModal} dataElement={DataElements.CONTENT_EDIT_LINK_MODAL} /> */}
         <LazyLoadWrapper Component={LazyLoadComponents.SignatureModal} dataElement={DataElements.SIGNATURE_MODAL} />
         <LazyLoadWrapper Component={LazyLoadComponents.PrintModal} dataElement={DataElements.PRINT_MODAL} />
         <LazyLoadWrapper Component={LazyLoadComponents.ErrorModal} dataElement={DataElements.ERROR_MODAL} />
@@ -550,7 +550,7 @@ const App = ({ removeEventHandlers }) => {
             See https://apryse.atlassian.net/browse/WVR-3094
           */
         }
-        <ProgressModal />
+        {/* <ProgressModal /> */}
 
         <LazyLoadWrapper Component={LazyLoadComponents.WarningModal} dataElement={DataElements.WARNING_MODAL} />
         <LazyLoadWrapper Component={LazyLoadComponents.Model3DModal} dataElement={DataElements.MODEL3D_MODAL} />

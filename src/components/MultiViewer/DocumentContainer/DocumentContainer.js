@@ -24,6 +24,7 @@ const propTypes = {
 
 // TODO compare: check display mode scrolling
 const DocumentContainer = ({
+  currentReadOnlyMode,
   documentViewerKey,
   activeDocumentViewerKey,
   container,
@@ -72,19 +73,35 @@ const DocumentContainer = ({
       'annotationNoteConnectorLine'
     ]));
   };
+  // const onWheel = (e) => {
+  //   const displayMode = documentViewer.getDisplayModeManager().getDisplayMode();
+  //   if (isMouseWheelZoomEnabled && (e.metaKey || e.ctrlKey)) {
+  //     e.preventDefault();
+  //     wheelToZoom(e, core.getZoom(documentViewerKey));
+  //   } else if (!displayMode?.isContinuous() && displayMode?.IsScrollable()) {
+  //     wheelToNavigatePages(e);
+  //     dispatch(actions.closeElements([
+  //       'annotationPopup',
+  //       'textPopup',
+  //       'inlineCommentPopup',
+  //       'annotationNoteConnectorLine',
+  //     ]));
+  //   }
+  // };
   const onWheel = (e) => {
     const displayMode = documentViewer.getDisplayModeManager().getDisplayMode();
-    if (isMouseWheelZoomEnabled && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      wheelToZoom(e, core.getZoom(documentViewerKey));
-    } else if (!displayMode?.isContinuous() && displayMode?.IsScrollable()) {
-      wheelToNavigatePages(e);
-      dispatch(actions.closeElements([
-        'annotationPopup',
-        'textPopup',
-        'inlineCommentPopup',
-        'annotationNoteConnectorLine',
-      ]));
+    if (!currentReadOnlyMode.current) {
+      if (isMouseWheelZoomEnabled && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        wheelToZoom(e, core.getZoom(documentViewerKey));
+      } else if (!displayMode?.isContinuous() && displayMode?.IsScrollable()) {
+        wheelToNavigatePages(e);
+        dispatch(actions.closeElements([
+          'annotationPopup',
+          'textPopup',
+          'annotationNoteConnectorLine',
+        ]));
+      }
     }
   };
   const wheelToZoom = throttle((e, zoom) => {

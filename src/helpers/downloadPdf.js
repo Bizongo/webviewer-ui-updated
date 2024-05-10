@@ -29,6 +29,29 @@ export default async (dispatch, options = {}, documentViewerKey = 1) => {
   let includeComments = !!options.includeComments;
   const downloadAllPages = !pages || pages.length === doc.getPageCount();
 
+  const removeHTMLTagsHelper = innerHTML => {
+    const array = innerHTML.split('&lt;').join('&gt;').split('&gt;');
+    let result = "";
+    array.forEach((element, index) => {
+      if (index % 2 === 0) {
+        result = result + element;
+      } else if (element === '/p' || element === '/li') {
+        result = result + '\n';
+      }
+    });
+    return result;
+  };
+
+  const removeHTMLTags = xfdfString => {
+    const parser = new DOMParser();
+    let xmlDoc = parser.parseFromString(xfdfString, "text/xml");
+    var contentEls = xmlDoc.getElementsByTagName('contents');
+    for (let item of contentEls) {
+      item.innerHTML = removeHTMLTagsHelper(item.innerHTML);
+    }
+    return xmlDoc.documentElement.outerHTML;
+  };
+
   const downloadDataAsFile = (data, extension, options) => {
     const arr = new Uint8Array(data);
     const { downloadName } = options;
@@ -572,8 +595,10 @@ export default async (dispatch, options = {}, documentViewerKey = 1) => {
       dispatch(actions.closeElement(DataElements.LOADING_MODAL));
       fireEvent(Events.FILE_DOWNLOADED);
     } else if (pages && !downloadAllPages) {
+      options.xfdfString = removeHTMLTags(options.xfdfString);
       return doc.extractPages(pages, options.xfdfString).then((data) => downloadDataAsFile(data, extension, { ...options, downloadName }), handleError);
     } else {
+      clonedOptions.xfdfString = removeHTMLTags(clonedOptions.xfdfString);
       return doc.getFileData(clonedOptions).then((data) => downloadDataAsFile(data, extension, { ...options, downloadName }), handleError);
     }
   }).catch((error) => {

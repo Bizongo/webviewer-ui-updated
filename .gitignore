@@ -8,9 +8,9 @@ webviewer-ui.zip
 notes
 static/lib
 coverage
-build
+# build
 tests
-lib
+# lib
 .eslintignore
 keys
 test/cypress/screenshotsFolder
